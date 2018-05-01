@@ -1,0 +1,40 @@
+{
+  "name": "@pinyin/frame",
+  "version": "0.0.1",
+  "description": "Frame timing utilities",
+  "main": "lib/index.js",
+  "types": "src/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "prepublishOnly": "rm -r dist && npx tsc",
+    "test": "npx jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinyin/frame.git"
+  },
+  "keywords": [
+    "requestAnimationFrame",
+    "animation"
+  ],
+  "author": "Bo Bao <bob432091@gmail.com> (https://github.com/pinyin)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pinyin/frame/issues"
+  },
+  "homepage": "https://github.com/pinyin/frame#readme",
+  "dependencies": {
+    "@pinyin/maybe": "0.0.5",
+    "framesync": "^3.1.7",
+    "rxjs": "^6.0.0",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.4",
+    "typescript": "^2.8.3"
+  }
+}
