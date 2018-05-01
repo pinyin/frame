@@ -1,14 +1,14 @@
 {
   "name": "@pinyin/frame",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Frame timing utilities",
   "main": "lib/index.js",
-  "types": "src/index.d.ts",
+  "types": "lib/index.d.ts",
   "files": [
     "lib"
   ],
   "scripts": {
-    "prepublishOnly": "rm -r dist && npx tsc",
+    "prepublishOnly": "rm -r lib && npx tsc",
     "test": "npx jest"
   },
   "repository": {
