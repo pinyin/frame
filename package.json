@@ -1,9 +1,9 @@
 {
   "name": "@pinyin/frame",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Frame timing utilities",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "lib"
   ],
