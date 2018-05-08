@@ -5,7 +5,7 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "declaration": true,
-    "declarationDir": "lib",
+    "declarationDir": "dist",
     "strict": true,
     "importHelpers": true,
     "noEmitHelpers": true,
