@@ -4,6 +4,7 @@
     "target": "es5",
     "module": "commonjs",
     "esModuleInterop": true,
+    "inlineSourceMap": true,
     "declaration": true,
     "declarationDir": "dist",
     "strict": true,
