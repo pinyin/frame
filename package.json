@@ -1,6 +1,6 @@
 {
   "name": "@pinyin/frame",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Frame timing utilities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,6 +33,6 @@
     "tslib": "^1.9.0"
   },
   "devDependencies": {
-    "typescript": "^2.8.3"
+    "typescript": "^2.9.2"
   }
 }
