@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "prepublishOnly": "rm -rf dist && npx tsc",
-    "test": "npx jest"
+    "test": "npx tsc"
   },
   "repository": {
     "type": "git",

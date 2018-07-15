@@ -164,9 +164,7 @@ Temporary Items
 .cache-loader
 dist
 **/dist/*
-**/lib/*
 src/**/*.js
-'package-lock.json' 
 
 .vscode
 .cache
