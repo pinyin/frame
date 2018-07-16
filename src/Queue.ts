@@ -13,11 +13,15 @@ export class Queue {
         this.tasks.length = 0
     }
 
-    reschedule(to: Queue): void {
+    moveInto(to: Queue): void {
         for (let i = 0; i < this.tasks.length; i++) {
             try { to.schedule(this.tasks[i]) } catch {}
         }
 
+        this.tasks.length = 0
+    }
+
+    clear(): void {
         this.tasks.length = 0
     }
 
