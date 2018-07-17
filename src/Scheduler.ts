@@ -7,7 +7,7 @@ class Scheduler {
     async schedule(task: () => void,
                    phase: Phase.WRITE | Phase.READ,
                    optimizeFor: OptimizeFor = OptimizeFor.PERFORMANCE): Promise<void> {
-        if (PhaseOrder.indexOf(this.currentPhase) > PhaseOrder.indexOf(phase)) {
+        if (this.phases.indexOf(this.currentPhase) > this.phases.indexOf(phase)) {
             switch (optimizeFor) {
                 case OptimizeFor.PERFORMANCE:
                     this.nextFrameTasks[phase].schedule(task)
@@ -15,6 +15,7 @@ class Scheduler {
                 case OptimizeFor.LATENCY:
                     this.tasks[phase].schedule(task)
                     this.nextFrameTasks[phase].moveInto(this.tasks[phase]) // TDOO
+                    this.phases = [this.currentPhase, phase]
                     break
             }
         } else {
@@ -23,8 +24,6 @@ class Scheduler {
 
         await this.enterFrame()
         if (this.nextFrameHasTask) {
-            this.needNextFrame = true
-            await nextFrame()
             await this.prepareNextFrame()
         }
     }
@@ -34,9 +33,11 @@ class Scheduler {
         // only work with browser that has native Promise support
         while (this.hasTask) {
             await Promise.resolve()
-            PhaseOrder.forEach(phase => {
-                this.currentPhase = phase
-                try { this.tasks[phase].execute() } catch {}
+            this.phases.forEach(phase => {
+                if (this.tasks[phase].hasTask) {
+                    this.currentPhase = phase
+                    try { this.tasks[phase].execute() } catch {}
+                }
             })
         }
     }
@@ -49,26 +50,29 @@ class Scheduler {
         return this.nextFrameTasks.filter(queue => queue.hasTask).length > 0
     }
 
-    private currentPhase: Phase = PhaseOrder[0]
-    private tasks: [Queue, Queue] = [new Queue(), new Queue()]
-    private nextFrameTasks: [Queue, Queue] = [new Queue(), new Queue()]
-    private needNextFrame: boolean = false
+    private currentPhase = DefaultPhaseOrder[0]
+    private phases = DefaultPhaseOrder
+    private tasks = [new Queue(), new Queue()]
+    private nextFrameTasks = [new Queue(), new Queue()]
 
-    private prepareNextFrame(): void {
+    private async prepareNextFrame(): Promise<void> {
+        this.needNextFrame = true
+        await nextFrame()
         if (!this.needNextFrame) {
             return
         }
         this.needNextFrame = false
-        this.tasks.forEach(queue => queue.clear())
         const emptyTasks = this.tasks
         this.tasks = this.nextFrameTasks
         this.nextFrameTasks = emptyTasks
-        this.currentPhase = PhaseOrder[0]
+        this.currentPhase = DefaultPhaseOrder[0]
         this.enterFrame()
     }
+
+    private needNextFrame: boolean = false
 }
 
-const PhaseOrder = [Phase.WRITE, Phase.READ]
+const DefaultPhaseOrder: [Phase, Phase] = [Phase.WRITE, Phase.READ] // [Phase.READ, Phase.WRITE]
 
 export const SCHEDULER = new Scheduler()
 
