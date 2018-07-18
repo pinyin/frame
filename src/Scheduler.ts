@@ -57,7 +57,7 @@ class Scheduler {
 
     private async prepareNextFrame(): Promise<void> {
         this.needNextFrame = true
-        await nextFrame()
+        await nextFrame() // TODO support different browsers https://github.com/whatwg/html/issues/2569
         if (!this.needNextFrame) {
             return
         }
@@ -66,6 +66,7 @@ class Scheduler {
         this.tasks = this.nextFrameTasks
         this.nextFrameTasks = emptyTasks
         this.currentPhase = DefaultPhaseOrder[0]
+        this.phases = DefaultPhaseOrder
         this.enterFrame()
     }
 
