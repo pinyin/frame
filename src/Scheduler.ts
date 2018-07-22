@@ -1,4 +1,4 @@
-import {nextTask} from './nextTask'
+import {nextFrame} from './nextFrame'
 import {OptimizeFor} from './OptimizeFor'
 import {Phase} from './Phase'
 import {Queue} from './Queue'
@@ -23,8 +23,8 @@ class Scheduler {
         }
 
         await this.enterFrame()
-        if (this.nextFrameHasTask) {
-            await this.prepareNextFrame()
+        if (!this.nextFrameScheduled && this.nextFrameHasTask) {
+            await this.scheduleNextFrame()
         }
     }
 
@@ -55,13 +55,13 @@ class Scheduler {
     private tasks = [new Queue(), new Queue()]
     private nextFrameTasks = [new Queue(), new Queue()]
 
-    private async prepareNextFrame(): Promise<void> {
-        this.needNextFrame = true
-        await nextTask()
-        if (!this.needNextFrame) {
+    private async scheduleNextFrame(): Promise<void> {
+        this.nextFrameScheduled = true
+        await nextFrame()
+        if (!this.nextFrameScheduled) {
             return
         }
-        this.needNextFrame = false
+        this.nextFrameScheduled = false
         const emptyTasks = this.tasks
         this.tasks = this.nextFrameTasks
         this.nextFrameTasks = emptyTasks
@@ -70,7 +70,7 @@ class Scheduler {
         this.enterFrame()
     }
 
-    private needNextFrame: boolean = false
+    private nextFrameScheduled: boolean = false
 }
 
 const DefaultPhaseOrder: [Phase, Phase] = [Phase.WRITE, Phase.READ] // [Phase.READ, Phase.WRITE]
