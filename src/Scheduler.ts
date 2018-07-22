@@ -1,4 +1,4 @@
-import {nextFrame} from './nextFrame'
+import {nextTask} from './nextTask'
 import {OptimizeFor} from './OptimizeFor'
 import {Phase} from './Phase'
 import {Queue} from './Queue'
@@ -57,7 +57,7 @@ class Scheduler {
 
     private async prepareNextFrame(): Promise<void> {
         this.needNextFrame = true
-        await nextFrame() // TODO support different browsers https://github.com/whatwg/html/issues/2569
+        await nextTask()
         if (!this.needNextFrame) {
             return
         }
