@@ -1,4 +1,5 @@
 export {nextTask} from './src/nextTask'
+export {forDuration} from './src/forDuration'
 export {nextFrame} from './src/nextFrame'
 export {readPhase} from './src/readPhase'
 export {writePhase} from './src/writePhase'
