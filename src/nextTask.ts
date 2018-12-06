@@ -1,7 +1,3 @@
-import {SynchronousPromise} from 'synchronous-promise'
-
 export function nextTask(): Promise<void> {
-    return new SynchronousPromise(resolve =>
-        setTimeout(resolve, 0),
-    )
+    return new Promise(resolve => setTimeout(resolve, 0))
 }

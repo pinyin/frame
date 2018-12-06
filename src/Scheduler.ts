@@ -1,13 +1,17 @@
-import {nextFrame} from './nextFrame'
-import {OptimizeFor} from './OptimizeFor'
-import {Phase} from './Phase'
-import {Queue} from './Queue'
+import { nextFrame } from './nextFrame'
+import { OptimizeFor } from './OptimizeFor'
+import { Phase } from './Phase'
+import { Queue } from './Queue'
 
 class Scheduler {
-    async schedule(task: () => void,
-                   phase: Phase.WRITE | Phase.READ,
-                   optimizeFor: OptimizeFor = OptimizeFor.PERFORMANCE): Promise<void> {
-        if (this.phases.indexOf(this.currentPhase) > this.phases.indexOf(phase)) {
+    async schedule(
+        task: () => void,
+        phase: Phase.WRITE | Phase.READ,
+        optimizeFor: OptimizeFor = OptimizeFor.PERFORMANCE,
+    ): Promise<void> {
+        if (
+            this.phases.indexOf(this.currentPhase) > this.phases.indexOf(phase)
+        ) {
             switch (optimizeFor) {
                 case OptimizeFor.PERFORMANCE:
                     this.nextFrameTasks[phase].schedule(task)
@@ -36,7 +40,9 @@ class Scheduler {
             this.phases.forEach(phase => {
                 if (this.tasks[phase].hasTask) {
                     this.currentPhase = phase
-                    try { this.tasks[phase].execute() } catch {}
+                    try {
+                        this.tasks[phase].execute()
+                    } catch {}
                 }
             })
         }
@@ -76,4 +82,3 @@ class Scheduler {
 const DefaultPhaseOrder: [Phase, Phase] = [Phase.WRITE, Phase.READ] // [Phase.READ, Phase.WRITE]
 
 export const SCHEDULER = new Scheduler()
-
