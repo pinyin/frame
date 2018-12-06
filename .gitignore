@@ -170,4 +170,3 @@ src/**/*.js
 .cache
 /report.html
 
-*.js
