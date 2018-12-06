@@ -1,37 +1,46 @@
 {
-  "name": "@pinyin/frame",
-  "version": "0.0.15",
-  "description": "Frame timing utilities",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "sideEffects": false,
-  "files": [
-    "dist",
-    "src"
-  ],
-  "scripts": {
-    "prepublishOnly": "rm -rf dist && npx tsc",
-    "test": "npx tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pinyin/frame.git"
-  },
-  "keywords": [
-    "requestAnimationFrame",
-    "animation"
-  ],
-  "author": "Bo Bao <bob432091@gmail.com> (https://github.com/pinyin)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pinyin/frame/issues"
-  },
-  "homepage": "https://github.com/pinyin/frame#readme",
-  "dependencies": {
-    "synchronous-promise": "^2.0.5",
-    "tslib": "^1.9.0"
-  },
-  "devDependencies": {
-    "typescript": "^2.9.2"
-  }
+    "name": "@pinyin/frame",
+    "version": "0.0.15",
+    "description": "Frame timing utilities",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "sideEffects": false,
+    "files": [
+        "dist",
+        "src"
+    ],
+    "scripts": {
+        "prepublishOnly": "rm -rf dist && npx tsc",
+        "test": "npx tsc -p tsconfig.dist.json && npx jest",
+        "demo": "npx parcel tests/index.html --open --port 44454"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pinyin/frame.git"
+    },
+    "keywords": [
+        "requestAnimationFrame",
+        "animation"
+    ],
+    "author": "Bo Bao <bob432091@gmail.com> (https://github.com/pinyin)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pinyin/frame/issues"
+    },
+    "homepage": "https://github.com/pinyin/frame#readme",
+    "dependencies": {
+        "tslib": "^1.9.3"
+    },
+    "devDependencies": {
+        "@types/expect-puppeteer": "^3.3.0",
+        "@types/jest-environment-puppeteer": "^2.2.1",
+        "@types/puppeteer": "^1.11.1",
+        "jest": "^23.6.0",
+        "jest-puppeteer": "^3.5.2",
+        "parcel-bundler": "^1.10.3",
+        "puppeteer": "^1.11.0",
+        "ts-jest": "^23.10.5",
+        "ts-loader": "^5.3.1",
+        "typescript": "^3.2.1"
+    }
 }

@@ -1,12 +1,18 @@
 {
     "compilerOptions": {
+        "outDir": "dist",
         "target": "es5",
         "module": "commonjs",
         "downlevelIteration": true,
         "jsx": "react",
         "esModuleInterop": true,
         "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
         "strict": true,
+        "declarationDir": "dist",
+        "importHelpers": true,
+        "noEmitHelpers": true,
         "lib": ["es6", "dom"]
     },
     "exclude": ["node_modules", "dist"]
