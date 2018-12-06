@@ -11,7 +11,7 @@
     ],
     "scripts": {
         "prepublishOnly": "rm -rf dist && npx tsc",
-        "test": "npx tsc -p tsconfig.dist.json && npx jest",
+        "test": "npx tsc -p tsconfig.dist.json && npx jest --runInBand",
         "demo": "npx parcel tests/index.html --open --port 44454"
     },
     "repository": {
